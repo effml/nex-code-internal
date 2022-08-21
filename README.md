@@ -26,6 +26,7 @@ wget -O data/crest_demo/data.zip https://vistec-my.sharepoint.com/:u:/g/personal
 unzip -o -d /data/<freddie_username>/crest_demo /data/<freddie_username>/crest_demo/data.zip 
 rm /data/<freddie_username>/crest_demo/data.zip 
 conda activate nex
+pip install protobuf==3.20.*
 python train.py -scene /data/<freddie_username>/crest_demo -model_dir crest -http
 tensorboard --logdir runs/
 ```
