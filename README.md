@@ -21,9 +21,12 @@ We present NeX, a new approach to novel view synthesis based on enhancements of 
 
 ```shell
 conda env create -f environment.yml
-./download_demo_data.sh
+mkdir -p /data/<freddie_username>/crest_demo
+wget -O data/crest_demo/data.zip https://vistec-my.sharepoint.com/:u:/g/personal/pakkapon_p_s19_vistec_ac_th/ETjIGxfQHH5DjOMB807mb28BCVN6DZUmAB2FyWo52jSusg?download=1
+unzip -o -d /data/<freddie_username>/crest_demo /data/<freddie_username>/crest_demo/data.zip 
+rm /data/<freddie_username>/crest_demo/data.zip 
 conda activate nex
-python train.py -scene data/crest_demo -model_dir crest -http
+python train.py -scene /data/<freddie_username>/crest_demo -model_dir crest -http
 tensorboard --logdir runs/
 ```
 
