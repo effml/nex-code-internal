@@ -25,6 +25,7 @@ import http.server
 import socketserver
 import webbrowser
 from threading import Timer
+import faiss
 
 def is_deepview(dpath):
   # check if dataset is deepview dataset
@@ -272,3 +273,17 @@ def serve_files(model_dir='',web_path='runs/html/'):
         #need delay for waiting http server start listening
         Timer(2.0, open_webgl_on_nexmpi, (address,port,model_dir)).start() 
         http.serve_forever()
+
+def kmeans_gpu(x: pt.Tensor, n_clusters: int, verbose: bool = False, **kwargs):
+  start = time.time()
+  print(x.shape)
+  print(x.is_cuda)
+  if (len(x.shape)==1):
+    x = x.reshape(-1,1)
+  x = x.detach().cpu().numpy()
+  faiss_kmeans = faiss.Kmeans(x.shape[1], n_clusters, niter=1500, verbose=verbose, gpu=True)
+  faiss_kmeans.train(x)
+  end = time.time()
+  print("kmeans runtime: ", end-start, "seconds")
+  centroids =  pt.Tensor(faiss_kmeans.centroids).reshape(-1)
+  return pt.sort(centroids)[0]

@@ -320,7 +320,7 @@ class Network(nn.Module):
     print('Main Network',self.seq1)
 
 
-  def forward(self, sfm, feature, output_shape, selection):
+  def forward(self, sfm, feature, output_shape, selection, return_weights=False):
     ''' Rendering
     Args:
       sfm: reference camera parameter
@@ -384,9 +384,12 @@ class Network(nn.Module):
       # rgb: (layers, 3, rays, 1)
       rgb = pt.clamp(rgb + self.illumination, 0.0, 1.0)
 
-    weight = cumprod_exclusive(1 - mpi_a_sig)
+    cumprod = cumprod_exclusive(1 - mpi_a_sig)
+    weights = cumprod * mpi_a_sig
+    output = pt.sum(weights * rgb, dim=0, keepdim=True)
 
-    output = pt.sum(weight * rgb * mpi_a_sig, dim=0, keepdim=True)
+    if return_weights:
+      return output, weights
 
     return output
 
@@ -615,7 +618,8 @@ def train():
     epoch_mse = 0
 
     model.train()
-
+    if epoch == 0 or (epoch+1) % args.checkpoint == 0 or epoch == args.epochs-1:
+      all_weights = []
     for i, feature in enumerate(dataloader_train):
       #print("step: {}".format(i))
       setLearningRate(optimizer, epoch)
@@ -626,11 +630,28 @@ def train():
       #sample L-shaped rays
       sel = Lsel(output_shape, args.ray)
 
+      print('printing sel shape:')
+      print(sel.shape)
+
 
       gt = feature['image']
       gt = gt.view(gt.shape[0], gt.shape[1], gt.shape[2] * gt.shape[3])
       gt = gt[:, :, sel, None].cuda()
-      output = model(dataset.sfm, feature, output_shape, sel)
+      output, weights = model(dataset.sfm, feature, output_shape, sel, return_weights=True)
+      print("printing weights shape")
+      print(weights.shape)
+      if epoch == 0 or (epoch+1) % args.checkpoint == 0 or epoch == args.epochs-1:
+        all_weights.append(weights)
+
+      # # TODO: delete
+      # print("printing out output shapes")
+      # print(output.shape)
+      # print("printing out number of rays")
+      # print(args.ray)
+      # print("printing out weights min:")
+      # print(pt.min(weights))
+      # print("printing out weights max:")
+      # print(pt.max(weights))
 
       mse = pt.mean((output - gt) ** 2)
 
@@ -657,6 +678,17 @@ def train():
       toc_msg = ts.toc(step, loss_total.item())
       if step % args.tb_toc == 0:  print(toc_msg)
       ts.tic()
+
+    if epoch == 0 or (epoch+1) % args.checkpoint == 0 or epoch == args.epochs-1:
+      all_weights = pt.cat(all_weights, 2)
+      squeezed_weights = all_weights.squeeze()
+      weight_sums = pt.sum(squeezed_weights, axis=0)
+      distances = pt.matmul(squeezed_weights.permute((1,0)), pt.Tensor(model.planes))
+      distances = distances / weight_sums
+      print("computing centroids...")
+      distances_centroids = kmeans_gpu(x=distances, n_clusters=model.planes.shape[0])
+      print("printing out distances centroids")
+      print(distances_centroids)
 
     writer.add_scalar('loss/total', epoch_loss_total/len(sampler_train), epoch)
     writer.add_scalar('loss/mse', epoch_mse/len(sampler_train), epoch)
