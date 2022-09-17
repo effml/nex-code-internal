@@ -28,8 +28,7 @@ rm /data/<freddie_username>/crest_demo/data.zip
 conda activate nex
 pip install protobuf==3.20.*
 conda install -c pytorch faiss-gpu
-python train.py -scene /data/<freddie_username>/crest_demo -model_dir crest -http
-tensorboard --logdir runs/
+python train.py -scene /data/<freddie_username>/crest_demo -model_dir crest -http tensorboard --logdir runs/
 ```
 
 ## Installation
