@@ -31,6 +31,7 @@ from utils.colmap_runner import colmapGenPoses
 
 parser = argparse.ArgumentParser()
 
+
 #training schedule
 parser.add_argument('-epochs', type=int, default=4000, help='total epochs to train')
 parser.add_argument('-steps', type=int, default=-1, help='total steps to train. In our paper, we proposed to use epoch instead.')
@@ -311,6 +312,16 @@ class Network(nn.Module):
       raise ValueError("invalid dmin dmax")
 
     self.planes = getPlanes(sfm, args.layers * args.sublayers)
+    # self.planes = pt.Tensor([12.8627, 13.1314, 13.3139, 13.4658, 13.5894, 13.7031, 13.8025, 13.8969,
+    #     13.9817, 14.0529, 14.1175, 14.1773, 14.2350, 14.2858, 14.3323, 14.3744,
+    #     14.4113, 14.4476, 14.4782, 14.5084, 14.5364, 14.5637, 14.5883, 14.6125,
+    #     14.6359, 14.6580, 14.6823, 14.7042, 14.7265, 14.7476, 14.7703, 14.7904,
+    #     14.8107, 14.8312, 14.8523, 14.8745, 14.8982, 14.9226, 14.9446, 14.9660,
+    #     14.9878, 15.0115, 15.0353, 15.0602, 15.0869, 15.1152, 15.1448, 15.1746,
+    #     15.2052, 15.2334, 15.2629, 15.2943, 15.3274, 15.3631, 15.4014, 15.4439,
+    #     15.4928, 15.5408, 15.5947, 15.6520, 15.7255, 15.8021, 15.8847, 15.9730,
+    #     16.0717, 16.2656, 16.3729, 16.5771, 16.7213, 16.7538, 16.8694, 16.8901])
+        
     print('Mpi Size: {}'.format(self.mpi_c.shape))
     print('All combined layers: {}'.format(args.layers * args.sublayers))
     print(self.planes)
@@ -630,16 +641,16 @@ def train():
       #sample L-shaped rays
       sel = Lsel(output_shape, args.ray)
 
-      print('printing sel shape:')
-      print(sel.shape)
+      # print('printing sel shape:')
+      # print(sel.shape)
 
 
       gt = feature['image']
       gt = gt.view(gt.shape[0], gt.shape[1], gt.shape[2] * gt.shape[3])
       gt = gt[:, :, sel, None].cuda()
       output, weights = model(dataset.sfm, feature, output_shape, sel, return_weights=True)
-      print("printing weights shape")
-      print(weights.shape)
+      # print("printing weights shape")
+      # print(weights.shape)
       if epoch == 0 or (epoch+1) % args.checkpoint == 0 or epoch == args.epochs-1:
         all_weights.append(weights)
 
@@ -680,7 +691,7 @@ def train():
       ts.tic()
 
     if epoch == 0 or (epoch+1) % args.checkpoint == 0 or epoch == args.epochs-1:
-      all_weights = pt.cat(all_weights, 2)
+      all_weights = pt.cat(all_weights, 2).detach().cpu()
       squeezed_weights = all_weights.squeeze()
       weight_sums = pt.sum(squeezed_weights, axis=0)
       distances = pt.matmul(squeezed_weights.permute((1,0)), pt.Tensor(model.planes))
@@ -781,3 +792,6 @@ def loadDataset(dpath):
 if __name__ == "__main__":
   sys.excepthook = colored_hook(os.path.dirname(os.path.realpath(__file__)))
   train()
+
+
+

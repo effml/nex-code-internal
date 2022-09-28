@@ -275,15 +275,20 @@ def serve_files(model_dir='',web_path='runs/html/'):
         http.serve_forever()
 
 def kmeans_gpu(x: pt.Tensor, n_clusters: int, verbose: bool = False, **kwargs):
+
+  # print("DEBUGGGGGGGGG MEMORY")
+  # print(x.get_device() )
+
   start = time.time()
   print(x.shape)
   print(x.is_cuda)
   if (len(x.shape)==1):
     x = x.reshape(-1,1)
-  x = x.detach().cpu().numpy()
+  x = x.numpy()
   faiss_kmeans = faiss.Kmeans(x.shape[1], n_clusters, niter=1500, verbose=verbose, gpu=True)
   faiss_kmeans.train(x)
   end = time.time()
-  print("kmeans runtime: ", end-start, "seconds")
   centroids =  pt.Tensor(faiss_kmeans.centroids).reshape(-1)
+  print("kmeans runtime: ", end-start, "seconds")
+  print("RESULTS", pt.sort(centroids)[0])
   return pt.sort(centroids)[0]
