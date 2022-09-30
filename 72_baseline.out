@@ -1,0 +1,446 @@
+/home/eecs/jiezhi/nex-code-internal
+luigi
+Thu Sep 29 17:06:50 PDT 2022
+starting job...
+starting nex training:
+Thu Sep 29 17:06:50 PDT 2022
+cp: cannot create regular file 'runs/crest//home/eecs/jiezhi/nex-code-internal/train_2022_09_29_17:06:55.py': No such file or directory
+Loaded /data/jiezhi/crest_demo 3.093545072006373 201.81138969786392
+recentered (3, 4)
+Read offset from planes.txt: 300
+dmin = 4.700000, dmax = 200.000000, invz = 1, offset = 300
+TRAINING IMAGES: 36
+VALIDATE IMAGES: 6
+Basis Network: DataParallel(
+  (module): ReluMLP(
+    (activation): LeakyReLU(negative_slope=0.01)
+    (seq1): Sequential(
+      (0): Linear(in_features=12, out_features=64, bias=True)
+      (1): LeakyReLU(negative_slope=0.01)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): LeakyReLU(negative_slope=0.01)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+  )
+)
+Mpi Size: torch.Size([12, 3, 1356, 1608])
+All combined layers: 72
+[  4.7          4.765543     4.83293988   4.90227044   4.9736191
+   5.04707528   5.12273376   5.20069509   5.28106603   5.36396004
+   5.44949784   5.53780794   5.62902736   5.72330226   5.82078878
+   5.92165388   6.02607628   6.13424756   6.24637328   6.36267434
+   6.48338838   6.60877143   6.7390997    6.87467167   7.01581028
+   7.16286558   7.31621758   7.47627956   7.64350176   7.81837564
+   8.00143868   8.19327989   8.39454619   8.60594963   8.82827588
+   9.06239392   9.30926742   9.56996802   9.84569085  10.13777285
+  10.44771446  10.77720542  11.12815553  11.50273177  11.90340301
+  12.33299455  12.7947548   13.29243761  13.83040451  14.41375289
+  15.04847802  15.74167984  16.50182969  17.33911824  18.26591494
+  19.29738326  20.45231674  21.75429447  23.2333078   24.9280992
+  26.88960516  29.18616347  31.91163814  35.19856548  39.24035748
+  44.33078711  50.93878797  59.86187102  72.57503262  92.14413917
+ 126.16257089 200.        ]
+Using inverse depth: True, Min depth: 4.7, Max depth: 200.0
+Layer of MLP: 6
+Hidden Channel of MLP: 256
+Main Network DataParallel(
+  (module): VanillaMLP(
+    (activation): LeakyReLU(negative_slope=0.01)
+    (seq1): Sequential(
+      (0): Linear(in_features=56, out_features=256, bias=True)
+      (1): LeakyReLU(negative_slope=0.01)
+      (2): Linear(in_features=256, out_features=256, bias=True)
+      (3): LeakyReLU(negative_slope=0.01)
+      (4): Linear(in_features=256, out_features=256, bias=True)
+      (5): LeakyReLU(negative_slope=0.01)
+      (6): Linear(in_features=256, out_features=256, bias=True)
+      (7): LeakyReLU(negative_slope=0.01)
+      (8): Linear(in_features=256, out_features=256, bias=True)
+      (9): LeakyReLU(negative_slope=0.01)
+      (10): Linear(in_features=256, out_features=25, bias=True)
+    )
+  )
+)
+computing centroids...
+torch.Size([287928])
+False
+kmeans runtime:  1.9469208717346191 seconds
+RESULTS tensor([12.8627, 13.1314, 13.3132, 13.4643, 13.5886, 13.7031, 13.8024, 13.8968,
+        13.9818, 14.0530, 14.1175, 14.1772, 14.2350, 14.2860, 14.3329, 14.3758,
+        14.4132, 14.4487, 14.4789, 14.5085, 14.5363, 14.5635, 14.5885, 14.6127,
+        14.6360, 14.6583, 14.6825, 14.7041, 14.7263, 14.7476, 14.7705, 14.7906,
+        14.8105, 14.8307, 14.8520, 14.8745, 14.8982, 14.9225, 14.9446, 14.9661,
+        14.9878, 15.0118, 15.0364, 15.0626, 15.0900, 15.1184, 15.1475, 15.1777,
+        15.2079, 15.2356, 15.2644, 15.2959, 15.3296, 15.3655, 15.4029, 15.4447,
+        15.4934, 15.5414, 15.5948, 15.6520, 15.7253, 15.8019, 15.8847, 15.9730,
+        16.0717, 16.2656, 16.3729, 16.5769, 16.7211, 16.7539, 16.8694, 16.8901])
+printing out distances centroids
+tensor([12.8627, 13.1314, 13.3132, 13.4643, 13.5886, 13.7031, 13.8024, 13.8968,
+        13.9818, 14.0530, 14.1175, 14.1772, 14.2350, 14.2860, 14.3329, 14.3758,
+        14.4132, 14.4487, 14.4789, 14.5085, 14.5363, 14.5635, 14.5885, 14.6127,
+        14.6360, 14.6583, 14.6825, 14.7041, 14.7263, 14.7476, 14.7705, 14.7906,
+        14.8105, 14.8307, 14.8520, 14.8745, 14.8982, 14.9225, 14.9446, 14.9661,
+        14.9878, 15.0118, 15.0364, 15.0626, 15.0900, 15.1184, 15.1475, 15.1777,
+        15.2079, 15.2356, 15.2644, 15.2959, 15.3296, 15.3655, 15.4029, 15.4447,
+        15.4934, 15.5414, 15.5948, 15.6520, 15.7253, 15.8019, 15.8847, 15.9730,
+        16.0717, 16.2656, 16.3729, 16.5769, 16.7211, 16.7539, 16.8694, 16.8901])
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0482.jpg  14.637513  0.343376   0.8183037
+ images_IMG_0471.jpg  15.002246  0.342015   0.7991694
+ images_IMG_0454.jpg  14.267498  0.334428  0.79356414
+ images_IMG_0428.jpg  13.686280  0.329828  0.82814914
+ images_IMG_0463.jpg  14.730466  0.341380   0.8151545
+ images_IMG_0446.jpg  14.433896  0.332493   0.7916781
+-----------------------------------
+PSNR     14.459650
+SSIM      0.337253
+LPIPS     0.807670
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0446.jpg  15.313328  0.339544  0.77248746
+ images_IMG_0463.jpg  15.548296  0.348852  0.78374654
+ images_IMG_0482.jpg  15.664309  0.352642  0.78335726
+ images_IMG_0428.jpg  14.446867  0.334346   0.8003128
+ images_IMG_0471.jpg  15.777274  0.350927   0.7681714
+ images_IMG_0454.jpg  15.171690  0.339630   0.7665601
+-----------------------------------
+PSNR     15.320294
+SSIM      0.344323
+LPIPS     0.779106
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0482.jpg  16.739157  0.375242   0.7314201
+ images_IMG_0428.jpg  15.421655  0.346873  0.74949235
+ images_IMG_0463.jpg  16.441174  0.370799   0.7368231
+ images_IMG_0471.jpg  16.810345  0.376196    0.728956
+ images_IMG_0454.jpg  15.978230  0.352893   0.7293673
+ images_IMG_0446.jpg  16.032975  0.353983  0.72697425
+-----------------------------------
+PSNR     16.237256
+SSIM      0.362664
+LPIPS     0.733839
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0471.jpg  17.538426  0.411048   0.6853244
+ images_IMG_0463.jpg  17.190532  0.399502  0.69808865
+ images_IMG_0482.jpg  17.414786  0.402215   0.6921822
+ images_IMG_0454.jpg  16.757064  0.372493  0.69573116
+ images_IMG_0428.jpg  15.989509  0.365273   0.7068099
+ images_IMG_0446.jpg  16.812591  0.375744   0.6894087
+-----------------------------------
+PSNR     16.950485
+SSIM      0.387713
+LPIPS     0.694591
+0.35% (500/144000): 4.169e-02  t 0.227  @ Fri 30 02:44:15 (9:30:25)
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0446.jpg  17.390885  0.399865  0.65886235
+ images_IMG_0454.jpg  17.311894  0.394930  0.66696715
+ images_IMG_0428.jpg  16.664967  0.385558  0.67833054
+ images_IMG_0471.jpg  18.251317  0.450070   0.6438773
+ images_IMG_0482.jpg  18.117544  0.434908  0.65727574
+ images_IMG_0463.jpg  17.867040  0.430446  0.65959907
+-----------------------------------
+PSNR     17.600608
+SSIM      0.415963
+LPIPS     0.660819
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0463.jpg  18.220771  0.459391   0.6215236
+ images_IMG_0446.jpg  17.851718  0.423199   0.6259128
+ images_IMG_0428.jpg  17.094227  0.405662     0.64533
+ images_IMG_0482.jpg  18.529097  0.467162    0.616794
+ images_IMG_0471.jpg  18.708900  0.490868    0.600608
+ images_IMG_0454.jpg  17.787859  0.416159  0.63547575
+-----------------------------------
+PSNR     18.032095
+SSIM      0.443740
+LPIPS     0.624274
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0446.jpg  18.052825  0.444294   0.5911618
+ images_IMG_0482.jpg  18.971825  0.500144   0.5712048
+ images_IMG_0428.jpg  17.279874  0.421471   0.6112006
+ images_IMG_0463.jpg  18.663698  0.482488  0.57785165
+ images_IMG_0471.jpg  19.310948  0.530880  0.54888666
+ images_IMG_0454.jpg  17.934991  0.433901   0.5999425
+-----------------------------------
+PSNR     18.369027
+SSIM      0.468863
+LPIPS     0.583375
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0471.jpg  19.745666  0.567496   0.5051906
+ images_IMG_0454.jpg  18.258115  0.456606  0.56015605
+ images_IMG_0428.jpg  17.537344  0.440709  0.57990664
+ images_IMG_0482.jpg  19.342094  0.535186  0.53065217
+ images_IMG_0446.jpg  18.380953  0.468702   0.5523728
+ images_IMG_0463.jpg  18.960943  0.506941   0.5387063
+-----------------------------------
+PSNR     18.704186
+SSIM      0.495940
+LPIPS     0.544497
+0.69% (1000/144000): 2.489e-02  t 0.270  @ Fri 30 04:28:25 (11:08:06)
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0463.jpg  19.220560  0.528301  0.50021404
+ images_IMG_0471.jpg  20.222582  0.601237  0.46858078
+ images_IMG_0454.jpg  18.659013  0.481367  0.52747303
+ images_IMG_0428.jpg  17.866713  0.461484   0.5510948
+ images_IMG_0446.jpg  18.829067  0.494210  0.51901966
+ images_IMG_0482.jpg  19.928008  0.570136  0.49550438
+-----------------------------------
+PSNR     19.120991
+SSIM      0.522789
+LPIPS     0.510314
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0428.jpg  17.964002  0.471528  0.52675575
+ images_IMG_0463.jpg  19.328345  0.548309  0.46788502
+ images_IMG_0471.jpg  20.570229  0.630034  0.43494603
+ images_IMG_0482.jpg  20.208825  0.597513  0.45932478
+ images_IMG_0446.jpg  19.009136  0.509335    0.491625
+ images_IMG_0454.jpg  18.836390  0.498262    0.497351
+-----------------------------------
+PSNR     19.319487
+SSIM      0.542497
+LPIPS     0.479648
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0454.jpg  19.028554  0.512466   0.4709139
+ images_IMG_0482.jpg  20.642740  0.623128   0.4235665
+ images_IMG_0471.jpg  20.899567  0.655883   0.4010124
+ images_IMG_0428.jpg  18.089928  0.481651  0.49975172
+ images_IMG_0463.jpg  19.539411  0.560690  0.43899107
+ images_IMG_0446.jpg  19.203463  0.526006    0.463646
+-----------------------------------
+PSNR     19.567277
+SSIM      0.559970
+LPIPS     0.449647
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0482.jpg  20.736696  0.636718  0.40045232
+ images_IMG_0471.jpg  20.955594  0.671505  0.37582403
+ images_IMG_0454.jpg  19.017047  0.516690   0.4528486
+ images_IMG_0428.jpg  18.124558  0.485887  0.48216018
+ images_IMG_0463.jpg  19.525886  0.567489   0.4178501
+ images_IMG_0446.jpg  19.195480  0.530245   0.4439011
+-----------------------------------
+PSNR     19.592543
+SSIM      0.568089
+LPIPS     0.428839
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0428.jpg  18.296428  0.501462  0.46465683
+ images_IMG_0471.jpg  21.208247  0.687829  0.35800502
+ images_IMG_0446.jpg  19.448666  0.545591  0.42670387
+ images_IMG_0482.jpg  21.025217  0.653619  0.38185668
+ images_IMG_0454.jpg  19.244430  0.531805   0.4348722
+ images_IMG_0463.jpg  19.587107  0.576669  0.39976686
+-----------------------------------
+PSNR     19.801682
+SSIM      0.582829
+LPIPS     0.410977
+1.04% (1500/144000): 1.917e-02  t 0.276  @ Fri 30 09:07:37 (15:38:41)
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0446.jpg  19.467319  0.553341   0.4102428
+ images_IMG_0463.jpg  19.805818  0.588006  0.38078055
+ images_IMG_0482.jpg  21.265174  0.671659  0.36138466
+ images_IMG_0454.jpg  19.280576  0.539715  0.41792887
+ images_IMG_0471.jpg  21.665320  0.705564  0.33685142
+ images_IMG_0428.jpg  18.366574  0.506706  0.44584823
+-----------------------------------
+PSNR     19.975130
+SSIM      0.594165
+LPIPS     0.392173
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0428.jpg  18.520736  0.512150  0.43431413
+ images_IMG_0463.jpg  19.739439  0.589306  0.36835024
+ images_IMG_0482.jpg  21.382191  0.681238   0.3432895
+ images_IMG_0471.jpg  21.642844  0.715285   0.3228911
+ images_IMG_0454.jpg  19.344493  0.544258  0.40399218
+ images_IMG_0446.jpg  19.570757  0.559091  0.39595455
+-----------------------------------
+PSNR     20.033410
+SSIM      0.600221
+LPIPS     0.378132
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0428.jpg  18.491001  0.516757   0.4199258
+ images_IMG_0454.jpg  19.390344  0.548035  0.39340672
+ images_IMG_0482.jpg  21.350204  0.686006  0.32928643
+ images_IMG_0446.jpg  19.624985  0.564652  0.38542366
+ images_IMG_0463.jpg  19.699066  0.591232  0.36043185
+ images_IMG_0471.jpg  21.512840  0.717249  0.31322008
+-----------------------------------
+PSNR     20.011406
+SSIM      0.603989
+LPIPS     0.366949
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0482.jpg  21.658917  0.698035  0.31714106
+ images_IMG_0471.jpg  21.990397  0.733802  0.29852214
+ images_IMG_0454.jpg  19.441500  0.554689  0.38365787
+ images_IMG_0463.jpg  19.819339  0.595553  0.34766656
+ images_IMG_0446.jpg  19.716200  0.571438  0.37464863
+ images_IMG_0428.jpg  18.583242  0.520577   0.4108792
+-----------------------------------
+PSNR     20.201599
+SSIM      0.612349
+LPIPS     0.355419
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0463.jpg  19.879565  0.598921  0.34143114
+ images_IMG_0428.jpg  18.602976  0.522783   0.4067412
+ images_IMG_0471.jpg  22.087606  0.739529  0.29185227
+ images_IMG_0482.jpg  21.669511  0.702273  0.31236938
+ images_IMG_0454.jpg  19.393393  0.554816  0.38061532
+ images_IMG_0446.jpg  19.678079  0.573258  0.37054676
+-----------------------------------
+PSNR     20.218521
+SSIM      0.615263
+LPIPS     0.350593
+1.39% (2000/144000): 1.632e-02  t 0.226  @ Tue 04 03:00:55 (105:24:06)
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0454.jpg  19.514900  0.560381  0.37196797
+ images_IMG_0471.jpg  22.162346  0.745824  0.28480145
+ images_IMG_0482.jpg  21.781611  0.709882  0.30206916
+ images_IMG_0463.jpg  19.943988  0.603992  0.33362156
+ images_IMG_0428.jpg  18.592438  0.521927  0.39855862
+ images_IMG_0446.jpg  19.709767  0.575039  0.36390516
+-----------------------------------
+PSNR     20.284175
+SSIM      0.619507
+LPIPS     0.342487
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0463.jpg  19.927843  0.604676  0.32497582
+ images_IMG_0454.jpg  19.453103  0.563143   0.3654188
+ images_IMG_0428.jpg  18.665150  0.531006  0.38830978
+ images_IMG_0471.jpg  22.379961  0.754850  0.27339306
+ images_IMG_0446.jpg  19.715222  0.580765  0.35467607
+ images_IMG_0482.jpg  21.818880  0.714837  0.29484424
+-----------------------------------
+PSNR     20.326693
+SSIM      0.624879
+LPIPS     0.333603
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0482.jpg  21.957165  0.720102   0.2889588
+ images_IMG_0463.jpg  19.900112  0.605996   0.3207453
+ images_IMG_0428.jpg  18.695857  0.532936  0.38304177
+ images_IMG_0471.jpg  22.410678  0.758598  0.26777166
+ images_IMG_0454.jpg  19.586297  0.567772  0.36023512
+ images_IMG_0446.jpg  19.863431  0.585376  0.35023093
+-----------------------------------
+PSNR     20.402257
+SSIM      0.628463
+LPIPS     0.328497
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+===================================
+Measurement Result
+===================================
+                name       PSNR      SSIM       LPIPS
+ images_IMG_0446.jpg  19.756764  0.585302   0.3468214
+ images_IMG_0428.jpg  18.663909  0.533670  0.37728122
+ images_IMG_0471.jpg  22.463859  0.762790   0.2620244
+ images_IMG_0463.jpg  19.873478  0.608957  0.31660315
+ images_IMG_0482.jpg  21.958290  0.723941   0.2829246
+ images_IMG_0454.jpg  19.519385  0.567887   0.3545983
+-----------------------------------
+PSNR     20.372614
+SSIM      0.630424
+LPIPS     0.323376
+1.74% (2500/144000): 1.455e-02  t 0.229  @ Fri 30 06:56:52 (13:13:36)
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /data/jiezhi/miniconda3/envs/nex/lib/python3.8/site-packages/lpips/weights/v0.1/vgg.pth
+slurmstepd-luigi: error: *** JOB 31683 ON luigi CANCELLED AT 2022-09-29T17:44:10 ***
